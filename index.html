@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPSU Udaipur Championship — Campus Placement Drive Management System (CPDMS)</title>
+  <meta name="description" content="End-to-End System Design: HLD, LLD, ER Diagram, UI/UX 6 Screen States, Error Matrix, and Live Interactive Simulator.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- Global Header -->
+  <header class="app-header">
+    <div class="brand-container">
+      <div class="brand-logo-badge" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div class="brand-info">
+        <span class="championship-tag">
+          <span class="pulse-dot"></span>
+          SPSU Udaipur Championship • War Arena
+        </span>
+        <h1 class="system-title">Campus Placement Drive Management System</h1>
+      </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <nav class="main-nav-wrapper" aria-label="System Design Navigation">
+      <div class="main-nav-tabs">
+        <button class="nav-tab-btn active" data-target="panel-overview">
+          <span>📋</span> Overview
+        </button>
+        <button class="nav-tab-btn" data-target="panel-hld">
+          <span>🏛️</span> HLD Architecture
+        </button>
+        <button class="nav-tab-btn" data-target="panel-erd">
+          <span>🗄️</span> ER Diagram
+        </button>
+        <button class="nav-tab-btn" data-target="panel-lld">
+          <span>⚙️</span> LLD & Pseudo-code
+        </button>
+        <button class="nav-tab-btn" data-target="panel-screens">
+          <span>📱</span> UI/UX 6 States
+        </button>
+        <button class="nav-tab-btn" data-target="panel-matrix">
+          <span>🧪</span> Error Matrix
+        </button>
+        <button class="nav-tab-btn" data-target="panel-simulator">
+          <span>🎮</span> Live Prototype
+        </button>
+        <button class="nav-tab-btn" data-target="panel-bonus">
+          <span>🍕</span> Bonus Challenge
+        </button>
+        <button class="nav-tab-btn" data-target="panel-interview">
+          <span>💼</span> Interview & LinkedIn
+        </button>
+      </div>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <button id="sound-toggle-btn" class="icon-btn active" title="Toggle Sound FX" aria-label="Toggle Sound Effects">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+      </button>
+      <button class="cta-pill-btn" onclick="document.querySelector('[data-target=\'panel-simulator\']').click()">
+        <span>🚀</span> Test Live App
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Championship Arena Section -->
+  <section class="hero-arena">
+    <canvas id="hero-canvas" class="hero-canvas-bg"></canvas>
+    <div class="hero-content">
+      <div class="hero-badge-strip">
+        <span>🏆 SYSTEM DESIGN WAR ARENA</span>
+        <span>•</span>
+        <span>SARLAYASH FRAMEWORK: 10% CONCEPT / 90% HANDS-ON</span>
+      </div>
+      <h2 class="hero-headline">
+        Architecting the University <br>
+        <span class="gradient-text">Placement Drive Management System</span>
+      </h2>
+      <p class="hero-subtitle">
+        Design the complete solution end-to-end before writing a single line of code. 
+        Engineered for real-world campus recruitment with zero duplicate applications, high-throughput eligibility checks, and resilient error recovery.
+      </p>
+
+      <div class="hero-stat-ribbon">
+        <div class="stat-chip">
+          <span class="chip-value">4</span>
+          <span class="chip-label">Core Entities</span>
+        </div>
+        <div class="stat-chip">
+          <span class="chip-value">6</span>
+          <span class="chip-label">Screen States</span>
+        </div>
+        <div class="stat-chip">
+          <span class="chip-value">&lt; 150ms</span>
+          <span class="chip-label">Target Latency</span>
+        </div>
+        <div class="stat-chip">
+          <span class="chip-value">100%</span>
+          <span class="chip-label">Edge Case Guard</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Container -->
+  <main class="main-content">
+
+    <!-- ==========================================================================
+         PANEL 1: OVERVIEW & SYSTEM REQUIREMENTS
+         ========================================================================== -->
+    <section id="panel-overview" class="section-panel active-panel">
+      <div class="section-header">
+        <span class="section-kicker">Step 1 — Understand Requirements</span>
+        <h2 class="section-title">The Real Industry Problem & Requirements</h2>
+        <p class="section-desc">
+          Campus placement teams manage millions in offers across fragile spreadsheets and chaotic email chains. CPDMS replaces this with an authoritative, unified system of record.
+        </p>
+      </div>
+
+      <div class="grid-2" style="margin-bottom: 2rem;">
+        <div class="glass-card">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(239, 68, 68, 0.15); display: flex; align-items: center; justify-content: center; color: var(--rose-400);">⚠️</div>
+            <h3 style="font-size: 1.15rem;">The Spreadsheet Chaos</h3>
+          </div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.88rem; color: var(--text-secondary);">
+            <li>❌ <strong>Duplicate Data:</strong> Inconsistent records across 15+ Google Sheets and email inboxes.</li>
+            <li>❌ <strong>Missed Deadlines:</strong> Students apply past cutoffs; admins manually filter timestamps.</li>
+            <li>❌ <strong>Eligibility Errors:</strong> Students with low CGPA apply anyway, congesting interviewer schedules.</li>
+            <li>❌ <strong>Opaque Outcomes:</strong> Students spam CDC offices asking for selection status updates.</li>
+          </ul>
+        </div>
+
+        <div class="glass-card">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(16, 185, 129, 0.15); display: flex; align-items: center; justify-content: center; color: var(--emerald-400);">🛡️</div>
+            <h3 style="font-size: 1.15rem;">The CPDMS Engineered Solution</h3>
+          </div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.88rem; color: var(--text-secondary);">
+            <li>✅ <strong>Single Source of Truth:</strong> One centralized database with referential integrity.</li>
+            <li>✅ <strong>Automated Cutoffs:</strong> Server-side deadline and CGPA validation guards.</li>
+            <li>✅ <strong>Zero Duplicate Policy:</strong> Unique composite constraints guarantee 1 application per drive.</li>
+            <li>✅ <strong>Transparent Pipeline:</strong> Real-time status tracker (Applied → Shortlisted → Selected).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- User Personas & Functional Requirements -->
+      <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">User Personas & Functional Scope</h3>
+      <div class="grid-3" style="margin-bottom: 2rem;">
+        <div class="glass-card">
+          <div class="badge badge-indigo" style="margin-bottom: 0.75rem;">Persona 1</div>
+          <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Placement Admin (CDC)</h4>
+          <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1rem;">University director and placement coordinators.</p>
+          <ul style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem; padding-left: 1.1rem;">
+            <li>Register and manage company partners.</li>
+            <li>Create placement drives with role, package, CGPA, and deadline.</li>
+            <li>Inspect and export applicant rosters.</li>
+          </ul>
+        </div>
+
+        <div class="glass-card">
+          <div class="badge badge-cyan" style="margin-bottom: 0.75rem;">Persona 2</div>
+          <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Graduating Student</h4>
+          <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1rem;">Final and pre-final year engineering candidates.</p>
+          <ul style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem; padding-left: 1.1rem;">
+            <li>Browse active placement opportunities.</li>
+            <li>Receive automated eligibility feedback.</li>
+            <li>Submit strictly 1 application per drive.</li>
+            <li>Track application status in real-time.</li>
+          </ul>
+        </div>
+
+        <div class="glass-card">
+          <div class="badge badge-emerald" style="margin-bottom: 0.75rem;">Persona 3</div>
+          <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Placement Team / TPO</h4>
+          <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1rem;">Ground coordinators executing interview rounds.</p>
+          <ul style="font-size: 0.82rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem; padding-left: 1.1rem;">
+            <li>Update candidate stages: Shortlisted, Selected, Rejected.</li>
+            <li>Broadcast schedule notifications to candidates.</li>
+            <li>Generate placement statistics and accreditation reports.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Non-Functional Requirements Grid -->
+      <div class="glass-card">
+        <h4 style="font-size: 1.1rem; margin-bottom: 1rem;">Non-Functional Requirements (NFR)</h4>
+        <div class="grid-4">
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--indigo-400);">⚡ High Performance</div>
+            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem;">Sub-150ms read latency for drive listing via Redis caching layers.</p>
+          </div>
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--emerald-400);">🔒 Data Integrity & ACID</div>
+            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem;">PostgreSQL composite unique keys eliminate race conditions during high-volume application spikes.</p>
+          </div>
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--cyan-400);">📱 Responsive UI</div>
+            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem;">Seamless layout on mobile screens during rapid on-campus interview rounds.</p>
+          </div>
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--amber-400);">🛡️ Role-Based Access</div>
+            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem;">JWT tokens with claims ensuring students cannot alter drive requirements or view others' outcomes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 2: HIGH-LEVEL DESIGN (HLD)
+         ========================================================================== -->
+    <section id="panel-hld" class="section-panel">
+      <div class="section-header">
+        <span class="section-kicker">Step 2 — High-Level Design</span>
+        <h2 class="section-title">End-to-End System Architecture</h2>
+        <p class="section-desc">
+          HLD defines the major system components and their decoupled communication protocols. Click any architectural node below or simulate an end-to-end request packet flow.
+        </p>
+      </div>
+
+      <div class="hld-canvas-container">
+        <div class="hld-grid-overlay"></div>
+
+        <div class="hld-flow-controls">
+          <div>
+            <span class="badge badge-indigo">Interactive Architecture Simulation</span>
+            <span id="sim-status-label" style="font-size: 0.85rem; margin-left: 0.75rem; color: var(--text-secondary);">
+              Click "Simulate Request Flow" to trace data packet propagation.
+            </span>
+          </div>
+          <div class="flow-sim-btn-group">
+            <button id="btn-sim-flow" class="btn btn-primary btn-sm">
+              <span>▶</span> Simulate Request Flow
+            </button>
+          </div>
+        </div>
+
+        <!-- Architectural Node Layout -->
+        <div class="hld-architecture-diagram">
+
+          <!-- Layer 1: Client Layer -->
+          <div class="hld-layer">
+            <div id="hld-browser" class="hld-node" tabindex="0" role="button" aria-label="Student and Admin Client SPA">
+              <div class="node-icon">💻</div>
+              <div class="node-title">Client Browser (SPA)</div>
+              <div class="node-sub">Student & Admin Responsive UI</div>
+            </div>
+          </div>
+
+          <div class="hld-wire-v"></div>
+
+          <!-- Layer 2: API Gateway -->
+          <div class="hld-layer">
+            <div id="hld-api" class="hld-node" tabindex="0" role="button" aria-label="API Gateway and Reverse Proxy">
+              <div class="node-icon">🌐</div>
+              <div class="node-title">API Gateway / Reverse Proxy</div>
+              <div class="node-sub">Rate Limiting • SSL • CORS • Route Dispatch</div>
+            </div>
+          </div>
+
+          <div class="hld-wire-v"></div>
+
+          <!-- Layer 3: Microservices / Services Layer -->
+          <div class="hld-layer" style="gap: 1.25rem;">
+            <div id="hld-auth" class="hld-node" tabindex="0" role="button" aria-label="Auth Service">
+              <div class="node-icon">🔐</div>
+              <div class="node-title">Auth & RBAC</div>
+              <div class="node-sub">JWT Validation • SSO</div>
+            </div>
+
+            <div id="hld-drive" class="hld-node" tabindex="0" role="button" aria-label="Drive Service">
+              <div class="node-icon">🏢</div>
+              <div class="node-title">Drive Service</div>
+              <div class="node-sub">Companies & Deadlines</div>
+            </div>
+
+            <div id="hld-app" class="hld-node" tabindex="0" role="button" aria-label="Application Service">
+              <div class="node-icon">📝</div>
+              <div class="node-title">Application Service</div>
+              <div class="node-sub">Eligibility & State Machine</div>
+            </div>
+
+            <div id="hld-notify" class="hld-node" tabindex="0" role="button" aria-label="Notification Service">
+              <div class="node-icon">🔔</div>
+              <div class="node-title">Notification Queue</div>
+              <div class="node-sub">Async SMS • Email Alerts</div>
+            </div>
+          </div>
+
+          <div class="hld-wire-v"></div>
+
+          <!-- Layer 4: Persistence Layer -->
+          <div class="hld-layer">
+            <div id="hld-db" class="hld-node" tabindex="0" role="button" aria-label="PostgreSQL Primary Database">
+              <div class="node-icon">🗄️</div>
+              <div class="node-title">PostgreSQL Database</div>
+              <div class="node-sub">ACID Storage • Unique Composite Key Guard</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Node Details Inspector Panel -->
+        <div id="hld-inspector" class="component-inspector">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+            <div>
+              <span id="inspector-role" class="badge badge-indigo">Role</span>
+              <h3 id="inspector-title" style="margin-top: 0.35rem; font-size: 1.15rem;">Component Title</h3>
+            </div>
+            <span class="badge badge-cyan">Active Architectural Node</span>
+          </div>
+          <p id="inspector-desc" style="font-size: 0.88rem; color: var(--text-secondary); margin: 0.5rem 0 0.85rem; line-height: 1.6;"></p>
+          <div style="font-size: 0.8rem; color: var(--text-muted); background: rgba(0, 0, 0, 0.4); padding: 0.65rem 0.9rem; border-radius: var(--radius-md);">
+            <span>Recommended Tech Stack:</span> <strong id="inspector-stack" style="color: #ffffff;"></strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Component Responsibility Matrix -->
+      <div style="margin-top: 2rem;">
+        <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">Component Responsibility Matrix</h3>
+        <div class="matrix-table-container">
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Primary Responsibility</th>
+                <th>Communication Protocol</th>
+                <th>Failure Strategy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Web Application (SPA)</strong></td>
+                <td>Renders dashboards, client-side validation, error banners, and skeleton screens.</td>
+                <td>HTTPS / JSON over REST & WebSockets</td>
+                <td>Offline service worker cache for offline drive browsing.</td>
+              </tr>
+              <tr>
+                <td><strong>API Gateway</strong></td>
+                <td>Authenticates incoming traffic, terminates TLS, enforces token-bucket rate limiting.</td>
+                <td>HTTP/2 → gRPC / HTTP internal</td>
+                <td>Returns 429 Too Many Requests upon DDoS attempt.</td>
+              </tr>
+              <tr>
+                <td><strong>Drive Service</strong></td>
+                <td>Manages company records, drive creation, future deadline validation, and public catalog.</td>
+                <td>REST / JSON</td>
+                <td>Read-through Redis caching for 100x read throughput.</td>
+              </tr>
+              <tr>
+                <td><strong>Application Service</strong></td>
+                <td>Validates CGPA thresholds, deadline validity, and enforces 1 application per drive.</td>
+                <td>Internal REST / Message Bus</td>
+                <td>Idempotency keys and DB rollbacks on constraint failures.</td>
+              </tr>
+              <tr>
+                <td><strong>PostgreSQL Primary DB</strong></td>
+                <td>ACID transaction persistence, master student profile records, referential constraints.</td>
+                <td>TCP / Connection Pooling (PgBouncer)</td>
+                <td>Automated failover replica with point-in-time recovery.</td>
+              </tr>
+              <tr>
+                <td><strong>Notification Service</strong></td>
+                <td>Dispatches async email confirmations and SMS interview interview calls.</td>
+                <td>AMQP / Kafka Queue Consumer</td>
+                <td>Dead Letter Queue (DLQ) with exponential retry backoff.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- HLD Learner Checkpoint Callout -->
+      <div class="callout callout-info" style="margin-top: 1.5rem;">
+        <div>
+          <strong>🎯 HLD Learner Checkpoint:</strong> Can you explain the complete flow to a friend without discussing a single line of code?<br>
+          <em>"A student browses verified drives from the Drive Service via an API Gateway. When they submit an application, the Application Service verifies their student record and CGPA against the drive rules. If eligible, it records the application into the Database guarded by a unique constraint, and hands off a confirmation task to the Notification Queue."</em>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 3: ENTITY RELATIONSHIP (ER) DIAGRAM
+         ========================================================================== -->
+    <section id="panel-erd" class="section-panel">
+      <div class="section-header">
+        <span class="section-kicker">Step 3 — Database Design</span>
+        <h2 class="section-title">Entity Relationship (ER) Schema</h2>
+        <p class="section-desc">
+          Identify real-world nouns, primary keys (PK), foreign keys (FK), and cardinalities. Click any entity card to inspect its referential constraints.
+        </p>
+      </div>
+
+      <div class="er-canvas-wrapper">
+        <div class="er-diagram-grid">
+
+          <!-- Entity 1: COMPANY -->
+          <div class="er-entity-card" data-entity="COMPANY">
+            <div class="er-entity-header">
+              <span class="er-entity-title">🏢 COMPANY</span>
+              <span class="badge badge-indigo">1:N with Drive</span>
+            </div>
+            <div class="er-entity-body">
+              <div class="er-attr-row">
+                <span class="er-attr-name"><span class="er-attr-key pk">PK</span> company_id</span>
+                <span class="er-attr-type">UUID / VARCHAR(36)</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name">name</span>
+                <span class="er-attr-type">VARCHAR(100) NOT NULL</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name">industry</span>
+                <span class="er-attr-type">VARCHAR(60)</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name">website</span>
+                <span class="er-attr-type">VARCHAR(255)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Entity 2: PLACEMENT_DRIVE -->
+          <div class="er-entity-card" data-entity="PLACEMENT_DRIVE">
+            <div class="er-entity-header">
+              <span class="er-entity-title">🎯 PLACEMENT_DRIVE</span>
+              <span class="badge badge-cyan">Parent to App</span>
+            </div>
+            <div class="er-entity-body">
+              <div class="er-attr-row">
+                <span class="er-attr-name"><span class="er-attr-key pk">PK</span> drive_id</span>
+                <span class="er-attr-type">UUID / VARCHAR(36)</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name"><span class="er-attr-key fk">FK</span> company_id</span>
+                <span class="er-attr-type">UUID → COMPANY.company_id</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name">role</span>
+                <span class="er-attr-type">VARCHAR(100) NOT NULL</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name">package</span>
+                <span class="er-attr-type">DECIMAL(5,2) LPA</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name">deadline</span>
+                <span class="er-attr-type">DATE NOT NULL</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name">min_cgpa</span>
+                <span class="er-attr-type">DECIMAL(3,2) CHECK (0.0-10.0)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Entity 3: STUDENT -->
+          <div class="er-entity-card" data-entity="STUDENT">
+            <div class="er-entity-header">
+              <span class="er-entity-title">🎓 STUDENT</span>
+              <span class="badge badge-emerald">Candidate Record</span>
+            </div>
+            <div class="er-entity-body">
+              <div class="er-attr-row">
+                <span class="er-attr-name"><span class="er-attr-key pk">PK</span> student_id</span>
+                <span class="er-attr-type">VARCHAR(30) (Roll No)</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name">name</span>
+                <span class="er-attr-type">VARCHAR(100) NOT NULL</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name">email</span>
+                <span class="er-attr-type">VARCHAR(120) UNIQUE</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name">branch</span>
+                <span class="er-attr-type">VARCHAR(50) NOT NULL</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name">cgpa</span>
+                <span class="er-attr-type">DECIMAL(3,2) NOT NULL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Entity 4: APPLICATION -->
+          <div class="er-entity-card" data-entity="APPLICATION">
+            <div class="er-entity-header">
+              <span class="er-entity-title">📝 APPLICATION</span>
+              <span class="badge badge-amber">Unique Constraint</span>
+            </div>
+            <div class="er-entity-body">
+              <div class="er-attr-row">
+                <span class="er-attr-name"><span class="er-attr-key pk">PK</span> application_id</span>
+                <span class="er-attr-type">UUID / VARCHAR(36)</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name"><span class="er-attr-key fk">FK</span> student_id</span>
+                <span class="er-attr-type">VARCHAR(30) → STUDENT</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name"><span class="er-attr-key fk">FK</span> drive_id</span>
+                <span class="er-attr-type">UUID → PLACEMENT_DRIVE</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name">status</span>
+                <span class="er-attr-type">ENUM ('Applied','Shortlisted','Selected','Rejected')</span>
+              </div>
+              <div class="er-attr-row">
+                <span class="er-attr-name">applied_at</span>
+                <span class="er-attr-type">TIMESTAMP DEFAULT NOW()</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Cardinality Relationship Bar -->
+        <div class="relationship-bar">
+          <div class="rel-item">
+            <span>🏢 COMPANY</span>
+            <span class="badge badge-indigo">1 ———— *</span>
+            <span>🎯 PLACEMENT_DRIVE</span>
+          </div>
+          <div class="rel-item">
+            <span>🎓 STUDENT</span>
+            <span class="badge badge-emerald">1 ———— *</span>
+            <span>📝 APPLICATION</span>
+          </div>
+          <div class="rel-item">
+            <span>🎯 PLACEMENT_DRIVE</span>
+            <span class="badge badge-cyan">1 ———— *</span>
+            <span>📝 APPLICATION</span>
+          </div>
+        </div>
+
+        <div id="er-constraint-info" style="margin-top: 1.5rem;">
+          <div class="callout callout-warning">
+            <div>
+              <strong>⚠️ Critical Database Rule: Unique Application Index</strong><br>
+              One student must never apply twice to the same drive. Enforced in SQL as:<br>
+              <code>CREATE UNIQUE INDEX idx_student_drive_unique ON APPLICATION (student_id, drive_id);</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 4: LOW-LEVEL DESIGN (LLD) & PSEUDO-CODE
+         ========================================================================== -->
+    <section id="panel-lld" class="section-panel">
+      <div class="section-header">
+        <span class="section-kicker">Step 4 — Low-Level Design</span>
+        <h2 class="section-title">API Contracts, Logic & Pseudo-code Stepper</h2>
+        <p class="section-desc">
+          Step into the engine room. Inspect REST contracts and trace the <code>applyToDrive()</code> algorithm step-by-step with dynamic scenario injection.
+        </p>
+      </div>
+
+      <!-- Interactive Algorithm Stepper -->
+      <div class="glass-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <h3 style="font-size: 1.15rem;">Interactive Algorithm Stepper: <code>applyToDrive()</code></h3>
+            <p style="font-size: 0.8rem; color: var(--text-secondary);">Select a business scenario and step through execution line by line.</p>
+          </div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <select id="lld-scenario-select" class="form-select" style="width: auto;">
+              <option value="happy">Scenario 1: Happy Path (Eligible)</option>
+              <option value="low_cgpa">Scenario 2: Low CGPA Rejection</option>
+              <option value="deadline_passed">Scenario 3: Past Deadline Rejection</option>
+              <option value="duplicate">Scenario 4: Duplicate Application Block</option>
+            </select>
+            <button id="lld-btn-next" class="btn btn-primary btn-sm">▶ Step Forward</button>
+            <button id="lld-btn-reset" class="btn btn-secondary btn-sm">↺ Reset</button>
+          </div>
+        </div>
+
+        <div class="lld-stepper-container">
+          <!-- Code Block -->
+          <div class="code-viewer-card">
+            <div class="code-header">
+              <span style="font-size: 0.8rem; color: var(--text-secondary);">applyToDrive.pseudo</span>
+              <span class="badge badge-indigo">Guarded Flow</span>
+            </div>
+            <div class="code-editor-body">
+              <div class="code-line" data-line="1"><span class="line-no">1</span> <span>function applyToDrive(studentId, driveId):</span></div>
+              <div class="code-line" data-line="2"><span class="line-no">2</span> <span>  validate studentId &amp;&amp; driveId</span></div>
+              <div class="code-line" data-line="3"><span class="line-no">3</span> <span>  student = findStudent(studentId)</span></div>
+              <div class="code-line" data-line="4"><span class="line-no">4</span> <span>  drive = findDrive(driveId)</span></div>
+              <div class="code-line" data-line="5"><span class="line-no">5</span> <span>  if student does not exist: return ERROR: "Student not found"</span></div>
+              <div class="code-line" data-line="6"><span class="line-no">6</span> <span>  if drive does not exist: return ERROR: "Placement drive not found"</span></div>
+              <div class="code-line" data-line="7"><span class="line-no">7</span> <span>  if current_date &gt; drive.deadline: return ERROR: "Application deadline has passed"</span></div>
+              <div class="code-line" data-line="8"><span class="line-no">8</span> <span>  if student.cgpa &lt; drive.minCgpa: return ERROR: "You do not meet eligibility criteria"</span></div>
+              <div class="code-line" data-line="9"><span class="line-no">9</span> <span>  if applicationAlreadyExists(studentId, driveId): return ERROR: "You have already applied"</span></div>
+              <div class="code-line" data-line="10"><span class="line-no">10</span> <span>  create application with status = "Applied"</span></div>
+              <div class="code-line" data-line="11"><span class="line-no">11</span> <span>  return SUCCESS: "Application submitted successfully"</span></div>
+            </div>
+          </div>
+
+          <!-- Variable Watch & Execution Trace -->
+          <div class="execution-trace-card">
+            <h4 style="font-size: 0.95rem; color: #ffffff;">Variable State Watcher</h4>
+            <div class="variable-watch">
+              <div class="watch-row"><span class="watch-var">student</span><span id="watch-studentId" class="watch-val">-</span></div>
+              <div class="watch-row"><span class="watch-var">student.cgpa</span><span id="watch-studentCGPA" class="watch-val">-</span></div>
+              <div class="watch-row"><span class="watch-var">drive</span><span id="watch-driveId" class="watch-val">-</span></div>
+              <div class="watch-row"><span class="watch-var">drive.minCgpa</span><span id="watch-minCGPA" class="watch-val">-</span></div>
+              <div class="watch-row"><span class="watch-var">drive.deadline</span><span id="watch-deadline" class="watch-val">-</span></div>
+              <div class="watch-row"><span class="watch-var">deadlineExpired?</span><span id="watch-isExpired" class="watch-val">-</span></div>
+              <div class="watch-row"><span class="watch-var">alreadyApplied?</span><span id="watch-alreadyApplied" class="watch-val">-</span></div>
+            </div>
+
+            <div style="background: rgba(0, 0, 0, 0.4); padding: 0.85rem; border-radius: var(--radius-md); font-size: 0.8rem;">
+              <div style="color: var(--text-muted); margin-bottom: 0.35rem;">Execution Trace Log:</div>
+              <div id="lld-trace-log" style="color: #ffffff; font-family: monospace;">Ready.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- API Contracts Playground -->
+      <div class="api-spec-card">
+        <div class="api-tabs">
+          <button class="api-tab-btn active" data-target="api-post-drives">
+            <span class="badge badge-emerald">POST</span> /drives
+          </button>
+          <button class="api-tab-btn" data-target="api-get-drives">
+            <span class="badge badge-cyan">GET</span> /drives
+          </button>
+          <button class="api-tab-btn" data-target="api-post-apply">
+            <span class="badge badge-emerald">POST</span> /applications
+          </button>
+          <button class="api-tab-btn" data-target="api-patch-status">
+            <span class="badge badge-amber">PATCH</span> /applications/:id
+          </button>
+        </div>
+
+        <div class="api-body">
+          <!-- Spec 1: POST /drives -->
+          <div id="api-post-drives" class="api-spec-body">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <div>
+                <strong>Action:</strong> Create Placement Drive (Admin only)
+                <div style="font-size: 0.78rem; color: var(--text-secondary);">Authorization: Bearer &lt;JWT Admin Token&gt;</div>
+              </div>
+              <span class="badge badge-indigo">Role: CDC Admin</span>
+            </div>
+            <div class="grid-2">
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.35rem;">Request Payload:</div>
+                <pre style="background: #060911; padding: 0.85rem; border-radius: var(--radius-md); font-size: 0.78rem; color: #a5b4fc;">{
+  "companyId": "comp_1",
+  "role": "Software Development Engineer I",
+  "packageLpa": 24.5,
+  "minCgpa": 8.0,
+  "deadline": "2026-11-30"
+}</pre>
+              </div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.35rem;">Success Response (HTTP 201 Created):</div>
+                <pre style="background: #060911; padding: 0.85rem; border-radius: var(--radius-md); font-size: 0.78rem; color: #6ee7b7;">{
+  "status": "success",
+  "data": {
+    "driveId": "drv_101",
+    "message": "Placement drive created successfully"
+  }
+}</pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spec 2: GET /drives -->
+          <div id="api-get-drives" class="api-spec-body" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <div>
+                <strong>Action:</strong> List Placement Opportunities with Filters
+                <div style="font-size: 0.78rem; color: var(--text-secondary);">Query: ?minCgpa=7.5&amp;activeOnly=true</div>
+              </div>
+              <span class="badge badge-cyan">Role: Public / Student</span>
+            </div>
+            <pre style="background: #060911; padding: 0.85rem; border-radius: var(--radius-md); font-size: 0.78rem; color: #6ee7b7;">{
+  "count": 4,
+  "drives": [
+    { "driveId": "drv_101", "company": "Google", "role": "SDE I", "package": 24.5, "minCgpa": 8.0, "deadline": "2026-11-30" },
+    { "driveId": "drv_102", "company": "Microsoft", "role": "Cloud Associate", "package": 28.0, "minCgpa": 8.5, "deadline": "2026-12-05" }
+  ]
+}</pre>
+          </div>
+
+          <!-- Spec 3: POST /applications -->
+          <div id="api-post-apply" class="api-spec-body" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <div>
+                <strong>Action:</strong> Submit Drive Application
+                <div style="font-size: 0.78rem; color: var(--text-secondary);">Enforces unique constraint &amp; eligibility cutoff</div>
+              </div>
+              <span class="badge badge-emerald">Role: Student</span>
+            </div>
+            <div class="grid-2">
+              <div>
+                <pre style="background: #060911; padding: 0.85rem; border-radius: var(--radius-md); font-size: 0.78rem; color: #a5b4fc;">{
+  "studentId": "std_01",
+  "driveId": "drv_101"
+}</pre>
+              </div>
+              <div>
+                <pre style="background: #060911; padding: 0.85rem; border-radius: var(--radius-md); font-size: 0.78rem; color: #6ee7b7;">// HTTP 201 Created
+{
+  "applicationId": "app_901",
+  "status": "Applied",
+  "appliedAt": "2026-11-04T11:00:00Z"
+}</pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spec 4: PATCH /applications/:id -->
+          <div id="api-patch-status" class="api-spec-body" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <div>
+                <strong>Action:</strong> Update Application Selection Outcome
+                <div style="font-size: 0.78rem; color: var(--text-secondary);">Transitions: Applied → Shortlisted → Selected | Rejected</div>
+              </div>
+              <span class="badge badge-amber">Role: TPO / Admin</span>
+            </div>
+            <div class="grid-2">
+              <div>
+                <pre style="background: #060911; padding: 0.85rem; border-radius: var(--radius-md); font-size: 0.78rem; color: #a5b4fc;">{
+  "status": "Shortlisted",
+  "roundNotes": "Cleared technical coding round."
+}</pre>
+              </div>
+              <div>
+                <pre style="background: #060911; padding: 0.85rem; border-radius: var(--radius-md); font-size: 0.78rem; color: #6ee7b7;">// HTTP 200 OK
+{
+  "applicationId": "app_901",
+  "updatedStatus": "Shortlisted",
+  "notificationSent": true
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 5: UI/UX WIREFRAMES & 6 SCREEN STATES
+         ========================================================================== -->
+    <section id="panel-screens" class="section-panel">
+      <div class="section-header">
+        <span class="section-kicker">Step 5 &amp; 6 — UI/UX Design</span>
+        <h2 class="section-title">Wireframes &amp; 6 Core Screen States</h2>
+        <p class="section-desc">
+          Professional software isn't just a happy path. Switch across the 6 mandatory challenge screens and test their 5 live operational states.
+        </p>
+      </div>
+
+      <!-- Screen Selector Bar -->
+      <div class="screen-selector-bar">
+        <button class="screen-btn active" data-screen="login">1. Login / Access</button>
+        <button class="screen-btn" data-screen="admin_dashboard">2. Admin Dashboard</button>
+        <button class="screen-btn" data-screen="create_drive">3. Create Drive</button>
+        <button class="screen-btn" data-screen="drive_listing">4. Drive Listing</button>
+        <button class="screen-btn" data-screen="apply_screen">5. Apply Screen</button>
+        <button class="screen-btn" data-screen="application_status">6. Application Status</button>
+      </div>
+
+      <!-- State Switcher Bar -->
+      <div class="state-switcher-box">
+        <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-secondary);">
+          Select Operational Screen State:
+        </div>
+        <div class="state-pills-group">
+          <button class="state-pill state-input active" data-state="input">Normal / Input</button>
+          <button class="state-pill state-loading" data-state="loading">Loading / Skeleton</button>
+          <button class="state-pill state-empty" data-state="empty">Empty State</button>
+          <button class="state-pill state-validation" data-state="validation">Validation Error</button>
+          <button class="state-pill state-error" data-state="error">Business Rule Error</button>
+          <button class="state-pill state-success" data-state="success">Success State</button>
+        </div>
+      </div>
+
+      <!-- Mock Device Viewport -->
+      <div class="mock-device-viewport">
+        <div class="device-top-bar">
+          <div class="device-dots">
+            <span class="device-dot red"></span>
+            <span class="device-dot yellow"></span>
+            <span class="device-dot green"></span>
+          </div>
+          <div class="device-url-bar">https://placement.spsu.ac.in/portal/v2</div>
+          <div style="font-size: 0.72rem; color: var(--cyan-400); font-weight: 700;">LIVE STATE SIMULATOR</div>
+        </div>
+
+        <div style="padding: 1rem 1.5rem 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <h3 id="screen-active-title" style="font-size: 1.05rem;">Screen Title</h3>
+            <div id="screen-active-desc" style="font-size: 0.78rem; color: var(--text-muted);">Screen Description</div>
+          </div>
+          <span class="badge badge-indigo">Spoon-Fed Wireframe Engine</span>
+        </div>
+
+        <div id="device-screen-render" class="device-screen-content">
+          <!-- Dynamic Content Rendered by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 6: INPUT -> PROCESSING -> OUTPUT -> ERROR MATRIX
+         ========================================================================== -->
+    <section id="panel-matrix" class="section-panel">
+      <div class="section-header">
+        <span class="section-kicker">Step 7 — Exhaustive Edge-Case Matrix</span>
+        <h2 class="section-title">Input → Processing → Output → Error Matrix</h2>
+        <p class="section-desc">
+          The ultimate engineering deliverable proving every single state transition, happy flow, and negative guardrail has been designed.
+        </p>
+      </div>
+
+      <div class="matrix-table-container" style="margin-bottom: 2rem;">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Input Data</th>
+              <th>Processing &amp; Business Rules</th>
+              <th>Success Output</th>
+              <th>Error Output &amp; Handling</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Create Drive</strong></td>
+              <td>Company, Role, Package LPA, CGPA (0-10), Deadline date</td>
+              <td>Validate company exists; verify CGPA in range; verify deadline is strictly in the future.</td>
+              <td><span class="badge badge-emerald">201 Created</span> Drive ID issued; drive published to student feed.</td>
+              <td><span class="badge badge-rose">400 Bad Request</span> "Deadline must be a future date" or "Minimum CGPA must be between 0 and 10."</td>
+            </tr>
+            <tr>
+              <td><strong>Apply to Drive</strong></td>
+              <td>Student ID + Drive ID</td>
+              <td>Verify student exists; verify drive active; check student CGPA ≥ minCGPA; check unique constraint.</td>
+              <td><span class="badge badge-emerald">201 Created</span> Application ID created; status = "Applied"; email sent.</td>
+              <td><span class="badge badge-rose">409 Conflict</span> "You have already applied" or <span class="badge badge-rose">422</span> "You do not meet eligibility criteria."</td>
+            </tr>
+            <tr>
+              <td><strong>Update Status</strong></td>
+              <td>Application ID + New Status ('Applied'|'Shortlisted'|'Selected'|'Rejected')</td>
+              <td>Validate caller is Admin; check valid state machine transition (e.g. cannot revert Selected to Applied).</td>
+              <td><span class="badge badge-emerald">200 OK</span> Updated application status; trigger student alert email.</td>
+              <td><span class="badge badge-rose">400 Bad Request</span> "Invalid status transition" or <span class="badge badge-rose">404</span> "Application ID not found."</td>
+            </tr>
+            <tr>
+              <td><strong>List Drives</strong></td>
+              <td>Optional filters: minCgpa, branch, search keyword</td>
+              <td>Query PostgreSQL with pagination (LIMIT/OFFSET); query Redis cache for cache hit.</td>
+              <td><span class="badge badge-emerald">200 OK</span> Array of active placement drives with computed eligibility tags.</td>
+              <td><span class="badge badge-rose">503 Unavailable</span> "Database connection pool exhausted. Falling back to cached snapshot."</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Live Interactive Matrix Testbed -->
+      <div class="glass-card">
+        <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Live Matrix Testbed &amp; Validator</h3>
+        <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+          Tweak runtime variables to immediately evaluate the system's guardrail responses.
+        </p>
+
+        <div class="grid-3" style="margin-bottom: 1rem;">
+          <div class="form-group">
+            <label class="form-label">Action</label>
+            <select id="matrix-test-action" class="form-select">
+              <option value="apply">Apply to Placement Drive</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Student CGPA</label>
+            <input id="matrix-test-cgpa" type="number" class="form-input" value="7.2" step="0.1">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Drive Cutoff CGPA</label>
+            <input id="matrix-test-mincgpa" type="number" class="form-input" value="8.0" step="0.1">
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1.5rem; margin-bottom: 1.25rem; flex-wrap: wrap;">
+          <label style="font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+            <input id="matrix-test-duplicate" type="checkbox"> Simulate Duplicate Application Exists
+          </label>
+          <label style="font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+            <input id="matrix-test-expired" type="checkbox"> Simulate Deadline Expired Yesterday
+          </label>
+        </div>
+
+        <button id="btn-run-matrix-test" class="btn btn-primary btn-sm">⚡ Run Matrix Validation Pipeline</button>
+        <div id="matrix-test-result" style="margin-top: 1rem; display: none;"></div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 7: LIVE INTERACTIVE CPDMS APP SIMULATOR
+         ========================================================================== -->
+    <section id="panel-simulator" class="section-panel">
+      <div class="section-header">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span class="section-kicker">Live Functional Prototype</span>
+            <h2 class="section-title">Interactive CPDMS Application Simulator</h2>
+            <p class="section-desc">Experience the system live. Switch personas, apply to drives, enforce CGPA rules, and update selection outcomes in real-time.</p>
+          </div>
+          <button id="btn-reset-demo-db" class="btn btn-secondary btn-sm" title="Restore seed data">↺ Reset Demo Database</button>
+        </div>
+      </div>
+
+      <!-- Persona Switcher -->
+      <div style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem;">
+        <button id="sim-role-student" class="btn btn-primary active">
+          <span>🎓</span> Student Portal View
+        </button>
+        <button id="sim-role-admin" class="btn btn-secondary">
+          <span>🏢</span> CDC Admin / TPO View
+        </button>
+      </div>
+
+      <!-- STUDENT PORTAL VIEW -->
+      <div id="sim-portal-student">
+        <div class="glass-card" style="margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <span class="badge badge-cyan">Active Student Session</span>
+              <h3 style="font-size: 1.2rem; margin-top: 0.25rem;">Candidate Dashboard</h3>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span style="font-size: 0.82rem; color: var(--text-secondary);">Switch Candidate:</span>
+              <select id="sim-active-student-select" class="form-select" style="width: auto;">
+                <option value="std_01">Rahul Sharma (8.4 CGPA • CS)</option>
+                <option value="std_02">Priya Patel (7.2 CGPA • IT)</option>
+                <option value="std_03">Aman Verma (6.1 CGPA • ME)</option>
+              </select>
+            </div>
+          </div>
+          <div id="student-live-profile"></div>
+        </div>
+
+        <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">Available Placement Drives</h3>
+        <div id="student-drives-list" class="grid-2" style="margin-bottom: 2rem;"></div>
+
+        <div class="glass-card">
+          <h3 style="font-size: 1.15rem; margin-bottom: 1rem;">My Placement Applications &amp; Status Tracker</h3>
+          <div id="student-my-applications"></div>
+        </div>
+      </div>
+
+      <!-- ADMIN PORTAL VIEW -->
+      <div id="sim-portal-admin" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span class="badge badge-indigo">CDC Administrative Hub</span>
+            <h3 style="font-size: 1.25rem; margin-top: 0.25rem;">Placement Operations Center</h3>
+          </div>
+          <button id="btn-open-create-drive" class="btn btn-primary btn-sm">+ Create Placement Drive</button>
+        </div>
+
+        <div class="grid-4" style="margin-bottom: 1.5rem;">
+          <div class="stat-chip"><span id="kpi-total-drives" class="chip-value">4</span><span class="chip-label">Total Drives</span></div>
+          <div class="stat-chip"><span id="kpi-total-apps" class="chip-value">2</span><span class="chip-label">Total Applications</span></div>
+          <div class="stat-chip"><span id="kpi-total-short" class="chip-value">1</span><span class="chip-label">Shortlisted</span></div>
+          <div class="stat-chip"><span id="kpi-total-placed" class="chip-value">0</span><span class="chip-label">Selected / Placed</span></div>
+        </div>
+
+        <div class="glass-card">
+          <h4 style="font-size: 1.05rem; margin-bottom: 1rem;">Applicant Status Control Roster</h4>
+          <div class="matrix-table-container">
+            <table class="matrix-table">
+              <thead>
+                <tr>
+                  <th>Student Candidate</th>
+                  <th>Company &amp; Role</th>
+                  <th>Applied Timestamp</th>
+                  <th>Current Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="admin-apps-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 8: BONUS CHALLENGE (FOOD DELIVERY SYSTEM)
+         ========================================================================== -->
+    <section id="panel-bonus" class="section-panel">
+      <div class="section-header">
+        <span class="section-kicker">Bonus Practice Challenge</span>
+        <h2 class="section-title">Food Delivery Order Tracking System</h2>
+        <p class="section-desc">
+          Applying the same rigorous architecture principles to a new business domain: customer orders, live rider tracking, and state sequences.
+        </p>
+      </div>
+
+      <div class="grid-2" style="margin-bottom: 2rem;">
+        <div class="glass-card">
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">1. Core Domain Entities &amp; ERD</h3>
+          <ul style="font-size: 0.85rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.5rem; list-style: none;">
+            <li>👤 <strong>Customer:</strong> <code>customer_id (PK), name, phone, address, lat, lng</code></li>
+            <li>🍴 <strong>Restaurant:</strong> <code>restaurant_id (PK), name, is_open, prep_time_mins</code></li>
+            <li>🍕 <strong>MenuItem:</strong> <code>item_id (PK), restaurant_id (FK), name, price, is_available</code></li>
+            <li>📦 <strong>Order:</strong> <code>order_id (PK), customer_id (FK), rider_id (FK), total, status</code></li>
+            <li>🏍️ <strong>DeliveryPartner:</strong> <code>rider_id (PK), name, current_lat, current_lng, is_busy</code></li>
+          </ul>
+        </div>
+
+        <div class="glass-card">
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">2. Order Status State Machine</h3>
+          <div style="background: rgba(0, 0, 0, 0.4); padding: 1rem; border-radius: var(--radius-md); font-family: monospace; font-size: 0.82rem; line-height: 1.8; color: var(--cyan-400);">
+            [PLACED] → [PAYMENT_VERIFIED] → [RESTAURANT_ACCEPTED]<br>
+            ↓<br>
+            [PREPARING] → [RIDER_ASSIGNED] → [OUT_FOR_DELIVERY]<br>
+            ↓<br>
+            [DELIVERED]  (Terminal State)<br>
+            <span style="color: var(--rose-400);">OR [CANCELLED] (if payment fails or restaurant rejects)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <h3 style="font-size: 1.15rem; margin-bottom: 1rem;">Critical Failure Flows &amp; Compensations</h3>
+        <div class="grid-3">
+          <div style="border-left: 3px solid var(--rose-500); padding-left: 0.85rem;">
+            <strong>Payment Gateway Timeout</strong>
+            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem;">
+              If the bank gateway fails to acknowledge within 30 seconds, order transitions to <code>PAYMENT_PENDING</code> with a 5-minute expiry countdown before auto-cancellation.
+            </p>
+          </div>
+          <div style="border-left: 3px solid var(--amber-500); padding-left: 0.85rem;">
+            <strong>No Rider Assigned</strong>
+            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem;">
+              Radius expansion algorithm increases geo-fence from 3km to 6km. If unassigned after 8 minutes, customer is prompted for cancellation with full compensation credit.
+            </p>
+          </div>
+          <div style="border-left: 3px solid var(--cyan-500); padding-left: 0.85rem;">
+            <strong>Live WebSocket Disconnect</strong>
+            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem;">
+              Client automatically falls back to HTTP Long-Polling every 5 seconds to track rider GPS coordinates without breaking user UI.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 9: INTERVIEW READINESS & LINKEDIN SHOWCASE
+         ========================================================================== -->
+    <section id="panel-interview" class="section-panel">
+      <div class="section-header">
+        <span class="section-kicker">Placement Readiness &amp; Proof of Work</span>
+        <h2 class="section-title">Championship Interview Prep &amp; LinkedIn Generator</h2>
+        <p class="section-desc">
+          8 Championship technical interview questions and an auto-formatted LinkedIn post generator to publish your design evidence.
+        </p>
+      </div>
+
+      <!-- 8 Championship Interview Questions -->
+      <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Championship Technical Interview Q&amp;A</h3>
+      <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 2.5rem;">
+
+        <div class="interview-card">
+          <div class="interview-question">
+            <span>1. Explain the difference between HLD and LLD using your project.</span>
+            <span>➕</span>
+          </div>
+          <div class="interview-answer">
+            <strong>Answer:</strong> High-Level Design (HLD) defines the broad system boundaries, macro services (Drive Service, Application Service, Notification Queue), networking protocols, and scalability strategy (PostgreSQL with Redis caching). Low-Level Design (LLD) drills into class schemas, specific REST endpoint contracts, data types, exact validation guards, and the step-by-step logic of the <code>applyToDrive()</code> function.
+          </div>
+        </div>
+
+        <div class="interview-card">
+          <div class="interview-question">
+            <span>2. Why did you choose these entities for your ER Diagram?</span>
+            <span>➕</span>
+          </div>
+          <div class="interview-answer">
+            <strong>Answer:</strong> The business domain consists of four primary actors and events: <code>COMPANY</code> (the recruiting partner), <code>PLACEMENT_DRIVE</code> (the recruiting event with role and cutoffs), <code>STUDENT</code> (the candidate master), and <code>APPLICATION</code> (the transactional join entity capturing when a student applies, their eligibility snapshot, and round outcomes).
+          </div>
+        </div>
+
+        <div class="interview-card">
+          <div class="interview-question">
+            <span>3. Explain the relationship between Placement Drive and Application.</span>
+            <span>➕</span>
+          </div>
+          <div class="interview-answer">
+            <strong>Answer:</strong> It is a <strong>1-to-Many</strong> relationship. A single Placement Drive can receive hundreds of Applications from different candidates, but each Application belongs strictly to one Placement Drive. Across Student and Placement Drive, Application functions as the associative bridge entity for a Many-to-Many relationship.
+          </div>
+        </div>
+
+        <div class="interview-card">
+          <div class="interview-question">
+            <span>4. How would you prevent duplicate applications?</span>
+            <span>➕</span>
+          </div>
+          <div class="interview-answer">
+            <strong>Answer:</strong> We enforce duplicate prevention across three layers:
+            1. <strong>UI Layer:</strong> Disable the "Apply" button and show "Already Applied" if the student's ID is in the drive's applicant roster.<br>
+            2. <strong>Application Service Layer:</strong> Check <code>applicationAlreadyExists(studentId, driveId)</code> before executing write queries.<br>
+            3. <strong>Database Layer (Authoritative):</strong> A composite unique constraint <code>UNIQUE (student_id, drive_id)</code> in PostgreSQL guarantees zero duplicate entries even under concurrent race conditions.
+          </div>
+        </div>
+
+        <div class="interview-card">
+          <div class="interview-question">
+            <span>5. What validation should happen on frontend vs backend?</span>
+            <span>➕</span>
+          </div>
+          <div class="interview-answer">
+            <strong>Answer:</strong>
+            • <strong>Frontend Validation:</strong> Fast user feedback for field formats (non-empty role, positive package, date picker min date set to tomorrow). Never trusted for security.<br>
+            • <strong>Backend Validation:</strong> Mandatory authoritative checks. Validating student identity via JWT claims, fetching authoritative CGPA from the master database, and checking current server time against the drive deadline.
+          </div>
+        </div>
+
+        <div class="interview-card">
+          <div class="interview-question">
+            <span>6. How would your architecture change if 100,000 students used the system?</span>
+            <span>➕</span>
+          </div>
+          <div class="interview-answer">
+            <strong>Answer:</strong>
+            1. Introduce an <strong>Application Load Balancer (ALB)</strong> distributing traffic across autoscaled stateless container nodes.<br>
+            2. Deploy a <strong>Redis Cache Cluster</strong> to cache public active drives, absorbing 95% of read queries.<br>
+            3. Separate PostgreSQL into <strong>Primary (Writes) and Read Replicas (Listing Queries)</strong>.<br>
+            4. Transition application submission to an <strong>asynchronous message queue (Apache Kafka)</strong> with worker consumers processing writes smoothly without overloading the database.
+          </div>
+        </div>
+
+        <div class="interview-card">
+          <div class="interview-question">
+            <span>7. Describe one important error flow in your design.</span>
+            <span>➕</span>
+          </div>
+          <div class="interview-answer">
+            <strong>Answer:</strong> When a student attempts to apply after the deadline has passed. The Application Service checks <code>CURRENT_TIMESTAMP &gt; drive.deadline</code>, rejects the submission with HTTP 400 Bad Request ("Application deadline has passed"), logs the rejected attempt to audit storage, and returns an actionable error message to the student UI.
+          </div>
+        </div>
+
+        <div class="interview-card">
+          <div class="interview-question">
+            <span>8. Walk me through your design from business requirement to database.</span>
+            <span>➕</span>
+          </div>
+          <div class="interview-answer">
+            <strong>Answer:</strong> The requirement "Students can submit one application per drive" translates into:
+            1. <strong>UI:</strong> Drive card with live CGPA eligibility badge and single-click Apply modal.<br>
+            2. <strong>API:</strong> <code>POST /applications</code> receiving <code>{studentId, driveId}</code>.<br>
+            3. <strong>Service:</strong> Business logic validating student existence, deadline, CGPA criteria, and duplication.<br>
+            4. <strong>Database:</strong> An <code>APPLICATION</code> record inserted with composite index guarantee and timestamp.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- LinkedIn Proof of Work Generator -->
+      <div class="glass-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span class="badge badge-indigo">Publish Your Proof of Work</span>
+            <h3 style="font-size: 1.2rem; margin-top: 0.25rem;">LinkedIn Post 1-Click Generator</h3>
+          </div>
+          <button id="btn-copy-linkedin" class="btn btn-primary btn-sm">📋 Copy Ready-to-Publish Post</button>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 1.25rem;">
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input id="li-user-name" type="text" class="form-input" placeholder="e.g. Abhay Kumawat" value="Abhay Kumawat">
+          </div>
+          <div class="form-group">
+            <label class="form-label">University / Institution</label>
+            <input id="li-user-college" type="text" class="form-input" placeholder="e.g. SPSU Udaipur" value="SPSU Udaipur">
+          </div>
+        </div>
+
+        <div style="background: #060911; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem;">
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;">Formatted Post Preview:</div>
+          <pre id="li-post-preview" style="font-family: inherit; font-size: 0.85rem; color: var(--text-primary); white-space: pre-wrap; line-height: 1.6;"></pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Create Placement Drive Modal -->
+  <div id="modal-create-drive" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title" style="font-size: 1.15rem; color: #ffffff;">Create Placement Drive</h3>
+        <button id="btn-close-modal" class="icon-btn" aria-label="Close modal">✕</button>
+      </div>
+      <form id="form-create-drive">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Company Name <span class="required">*</span></label>
+            <input id="input-drive-company" type="text" class="form-input" placeholder="e.g. Amazon India" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Job Role <span class="required">*</span></label>
+            <input id="input-drive-role" type="text" class="form-input" placeholder="e.g. Cloud Support Engineer" required>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label">Package (LPA) <span class="required">*</span></label>
+              <input id="input-drive-package" type="number" class="form-input" placeholder="e.g. 16.0" step="0.5" min="0.1" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Minimum CGPA (0-10) <span class="required">*</span></label>
+              <input id="input-drive-cgpa" type="number" class="form-input" placeholder="e.g. 7.5" step="0.1" min="0.0" max="10.0" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Application Deadline <span class="required">*</span></label>
+            <input id="input-drive-deadline" type="date" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Role Description</label>
+            <textarea id="input-drive-desc" class="form-input" rows="3" placeholder="Brief job summary, prerequisites, and interview rounds..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="document.getElementById('modal-create-drive').classList.remove('active')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Publish Drive</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
