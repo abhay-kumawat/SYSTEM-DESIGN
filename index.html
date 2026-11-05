@@ -41,6 +41,14 @@
 
       <!-- Header Actions -->
       <div class="header-actions">
+        <!-- Interactive Theme Accent Glow Switcher -->
+        <div class="accent-palette-picker" title="Switch Theme Glow Accent">
+          <button class="palette-dot active" data-accent="violet" style="background: #8b5cf6;" title="Cyber Violet"></button>
+          <button class="palette-dot" data-accent="cyan" style="background: #06b6d4;" title="Neon Cyan"></button>
+          <button class="palette-dot" data-accent="emerald" style="background: #10b981;" title="Matrix Emerald"></button>
+          <button class="palette-dot" data-accent="rose" style="background: #f43f5e;" title="Sunset Rose"></button>
+        </div>
+
         <a href="https://github.com/abhay-kumawat/SYSTEM-DESIGN" target="_blank" rel="noopener noreferrer" class="github-badge-btn" title="View Source on GitHub">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
@@ -59,41 +67,46 @@
       </div>
     </div>
 
-    <!-- Main Navigation Bar -->
+    <!-- Main Navigation Bar with Smooth Scroll Arrows -->
     <div class="header-nav-strip">
-      <nav class="main-nav-wrapper" aria-label="System Design Navigation">
+      <button id="nav-scroll-prev" class="nav-arrow-btn" aria-label="Scroll Tabs Left" title="Scroll Left">‹</button>
+      <nav class="main-nav-wrapper" id="main-nav-wrapper" aria-label="System Design Navigation">
         <div class="main-nav-tabs">
           <button class="nav-tab-btn active" data-target="panel-overview">
             <span>📋</span> Overview
           </button>
           <button class="nav-tab-btn" data-target="panel-hld">
-            <span>🏛️</span> HLD Architecture
+            <span>🏛️</span> HLD Arch
           </button>
           <button class="nav-tab-btn" data-target="panel-erd">
             <span>🗄️</span> ER Diagram
           </button>
           <button class="nav-tab-btn" data-target="panel-lld">
-            <span>⚙️</span> LLD & Pseudo-code
+            <span>⚙️</span> LLD Logic
           </button>
           <button class="nav-tab-btn" data-target="panel-screens">
-            <span>📱</span> UI/UX 6 States
+            <span>📱</span> UI/UX States
           </button>
           <button class="nav-tab-btn" data-target="panel-matrix">
             <span>🧪</span> Error Matrix
           </button>
           <button class="nav-tab-btn" data-target="panel-simulator">
-            <span>🎮</span> Live Prototype
+            <span>🎮</span> Live App
           </button>
           <button class="nav-tab-btn" data-target="panel-bonus">
-            <span>🍕</span> Bonus Challenge
+            <span>🍕</span> Food Bonus
           </button>
           <button class="nav-tab-btn" data-target="panel-interview">
-            <span>💼</span> Interview & LinkedIn
+            <span>💼</span> Interview Q&A
           </button>
         </div>
       </nav>
+      <button id="nav-scroll-next" class="nav-arrow-btn" aria-label="Scroll Tabs Right" title="Scroll Right">›</button>
     </div>
   </header>
+
+  <!-- Fullscreen Interactive Confetti Canvas -->
+  <canvas id="confetti-canvas" class="confetti-canvas" aria-hidden="true"></canvas>
 
   <!-- Hero Championship Arena Section -->
   <section class="hero-arena">

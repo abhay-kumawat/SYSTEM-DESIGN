@@ -299,10 +299,121 @@ function initHeroCanvas() {
   draw();
 }
 
-// Navigation Tabs Manager
+// Fullscreen Confetti Particle Physics Engine
+const ConfettiEngine = {
+  canvas: null,
+  ctx: null,
+  particles: [],
+  animating: false,
+  init() {
+    this.canvas = document.getElementById('confetti-canvas');
+    if (!this.canvas) return;
+    this.ctx = this.canvas.getContext('2d');
+    this.resize();
+    window.addEventListener('resize', () => this.resize());
+  },
+  resize() {
+    if (!this.canvas) return;
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+  },
+  fire(x = window.innerWidth / 2, y = window.innerHeight / 2.5) {
+    this.init();
+    if (!this.ctx) return;
+    const colors = ['#6366f1', '#06b6d4', '#10b981', '#f59e0b', '#ec4899', '#38bdf8', '#ffffff'];
+    for (let i = 0; i < 90; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 9 + 4;
+      this.particles.push({
+        x: x,
+        y: y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 2.5,
+        size: Math.random() * 8 + 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        alpha: 1,
+        rotation: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 12
+      });
+    }
+    if (!this.animating) {
+      this.animating = true;
+      this.render();
+    }
+  },
+  render() {
+    if (!this.particles.length) {
+      this.animating = false;
+      if (this.ctx && this.canvas) this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      return;
+    }
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    for (let i = this.particles.length - 1; i >= 0; i--) {
+      const p = this.particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.22; // gravity
+      p.alpha -= 0.016;
+      p.rotation += p.rotSpeed;
+
+      if (p.alpha <= 0) {
+        this.particles.splice(i, 1);
+        continue;
+      }
+
+      this.ctx.save();
+      this.ctx.translate(p.x, p.y);
+      this.ctx.rotate((p.rotation * Math.PI) / 180);
+      this.ctx.globalAlpha = p.alpha;
+      this.ctx.fillStyle = p.color;
+      this.ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.65);
+      this.ctx.restore();
+    }
+    requestAnimationFrame(() => this.render());
+  }
+};
+
+// Theme Accent Glow Switcher
+function initThemeAccentSwitcher() {
+  const dots = document.querySelectorAll('.palette-dot');
+  const savedAccent = localStorage.getItem('spsu_theme_accent') || 'violet';
+  document.body.dataset.accent = savedAccent;
+  dots.forEach(dot => {
+    if (dot.dataset.accent === savedAccent) dot.classList.add('active');
+    else dot.classList.remove('active');
+
+    dot.addEventListener('click', () => {
+      SoundFX.click();
+      dots.forEach(d => d.classList.remove('active'));
+      dot.classList.add('active');
+      const accent = dot.dataset.accent;
+      document.body.dataset.accent = accent;
+      localStorage.setItem('spsu_theme_accent', accent);
+      showToast(`Theme glow shifted to ${accent.toUpperCase()} mode!`, 'info');
+    });
+  });
+}
+
+// Navigation Tabs Manager & Smooth Scroll Arrows
 function initNavigation() {
   const tabs = document.querySelectorAll('.nav-tab-btn');
   const panels = document.querySelectorAll('.section-panel');
+  const prevBtn = document.getElementById('nav-scroll-prev');
+  const nextBtn = document.getElementById('nav-scroll-next');
+  const navWrapper = document.getElementById('main-nav-wrapper');
+
+  if (prevBtn && navWrapper) {
+    prevBtn.addEventListener('click', () => {
+      SoundFX.click();
+      navWrapper.scrollBy({ left: -240, behavior: 'smooth' });
+    });
+  }
+  if (nextBtn && navWrapper) {
+    nextBtn.addEventListener('click', () => {
+      SoundFX.click();
+      navWrapper.scrollBy({ left: 240, behavior: 'smooth' });
+    });
+  }
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -317,7 +428,6 @@ function initNavigation() {
       const activePanel = document.getElementById(targetId);
       if (activePanel) {
         activePanel.classList.add('active-panel');
-        // Scroll slightly down to panel start if needed
         activePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
@@ -436,6 +546,7 @@ function runHLDFlowSimulation() {
     if (step >= sequence.length) {
       document.querySelectorAll('.hld-node').forEach(n => n.classList.remove('active-packet'));
       if (statusLabel) statusLabel.innerHTML = '✨ <strong>Flow Completed:</strong> Application committed and student notified within 140ms!';
+      ConfettiEngine.fire();
       showToast('Architecture Flow Simulation Complete: End-to-end verified', 'success');
       return;
     }
@@ -1402,6 +1513,7 @@ function applyToDriveLive(driveId) {
   DB.save(store);
   renderLiveStudentPortal();
   renderLiveAdminPortal();
+  ConfettiEngine.fire();
   showToast(`Application #${newApp.id} submitted successfully! CDC notified.`, 'success');
 }
 
@@ -1477,6 +1589,9 @@ window.updateApplicationStatusLive = function(appId, newStatus) {
   DB.save(store);
   renderLiveAdminPortal();
   renderLiveStudentPortal();
+  if (newStatus === 'Selected') {
+    ConfettiEngine.fire();
+  }
   showToast(`Application #${appId} status updated to: "${newStatus}"`, 'info');
 };
 
@@ -1543,6 +1658,7 @@ function handleAdminCreateDrive() {
 
   renderLiveAdminPortal();
   renderLiveStudentPortal();
+  ConfettiEngine.fire();
   showToast(`Placement Drive for "${company.name} - ${role}" created successfully!`, 'success');
 }
 
@@ -1661,6 +1777,7 @@ I am learning to build with code—but more importantly, I am learning to think 
 document.addEventListener('DOMContentLoaded', () => {
   initMouseSpotlight();
   init3DTilt();
+  initThemeAccentSwitcher();
   initHeroCanvas();
   initNavigation();
   initHLDInteractive();
