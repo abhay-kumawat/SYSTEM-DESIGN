@@ -173,13 +173,52 @@ const DB = {
 let store = DB.load();
 let currentStudentId = 'std_01'; // Default logged in student
 
-// Particle Network Animation on Hero Canvas
+// Mouse Spotlight & 3D Glass Tilt Effects
+function initMouseSpotlight() {
+  window.addEventListener('mousemove', (e) => {
+    document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+    document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+  });
+}
+
+function init3DTilt() {
+  const cards = document.querySelectorAll('.glass-card, .stat-chip, .er-entity-card, .hld-node');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+      card.style.transition = 'transform 100ms ease';
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.transition = 'transform 400ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms ease, border-color 400ms ease';
+    });
+  });
+}
+
+// Particle Network Animation on Hero Canvas with Cyber-Aurora Hues
 function initHeroCanvas() {
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   let width, height;
   let particles = [];
+  const colors = ['#38bdf8', '#818cf8', '#c084fc', '#34d399', '#22d3ee', '#f472b6'];
+
+  let mouse = { x: -1000, y: -1000 };
+  window.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
 
   function resize() {
     width = canvas.width = canvas.parentElement.offsetWidth;
@@ -189,15 +228,16 @@ function initHeroCanvas() {
 
   function initParticles() {
     particles = [];
-    const count = Math.floor(width / 35);
+    const count = Math.floor(width / 30);
     for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6,
-        radius: Math.random() * 2 + 1,
-        alpha: Math.random() * 0.5 + 0.2
+        vx: (Math.random() - 0.5) * 0.7,
+        vy: (Math.random() - 0.5) * 0.7,
+        radius: Math.random() * 2.2 + 1.2,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        alpha: Math.random() * 0.6 + 0.25
       });
     }
   }
@@ -205,36 +245,50 @@ function initHeroCanvas() {
   function draw() {
     ctx.clearRect(0, 0, width, height);
 
-    // Draw links
+    // Draw connecting beams
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist < 110) {
+        if (dist < 125) {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(99, 102, 241, ${0.18 * (1 - dist / 110)})`;
+          ctx.strokeStyle = `rgba(139, 92, 246, ${0.22 * (1 - dist / 125)})`;
           ctx.lineWidth = 1;
           ctx.stroke();
         }
       }
     }
 
-    // Draw particles
+    // Draw glowing particles with subtle mouse gravity
     for (const p of particles) {
       p.x += p.vx;
       p.y += p.vy;
 
+      // Mouse influence
+      const mdx = mouse.x - p.x;
+      const mdy = mouse.y - p.y;
+      const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
+      if (mDist < 140) {
+        p.x -= (mdx / mDist) * 0.8;
+        p.y -= (mdy / mDist) * 0.8;
+      }
+
       if (p.x < 0 || p.x > width) p.vx *= -1;
       if (p.y < 0 || p.y > height) p.vy *= -1;
 
+      ctx.save();
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(34, 211, 238, ${p.alpha})`;
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.alpha;
+      ctx.shadowColor = p.color;
+      ctx.shadowBlur = 8;
       ctx.fill();
+      ctx.restore();
     }
 
     requestAnimationFrame(draw);
@@ -1605,6 +1659,8 @@ I am learning to build with code—but more importantly, I am learning to think 
 
 // Master Initialization on DOM Ready
 document.addEventListener('DOMContentLoaded', () => {
+  initMouseSpotlight();
+  init3DTilt();
   initHeroCanvas();
   initNavigation();
   initHLDInteractive();
