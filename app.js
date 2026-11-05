@@ -433,6 +433,27 @@ function initNavigation() {
     });
   });
 
+  // Handle URL query or hash on load (e.g. ?tab=panel-hld or #panel-hld)
+  const urlParam = new URLSearchParams(window.location.search).get('tab');
+  const urlHash = window.location.hash.replace('#', '');
+  const targetInitial = urlParam || urlHash;
+  if (targetInitial) {
+    const matchingTab = document.querySelector(`.nav-tab-btn[data-target="${targetInitial}"]`);
+    if (matchingTab) {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active-panel'));
+      matchingTab.classList.add('active');
+      const p = document.getElementById(targetInitial);
+      if (p) {
+        p.classList.add('active-panel');
+        const hero = document.querySelector('.hero-arena');
+        if (hero && targetInitial !== 'panel-overview') {
+          hero.style.display = 'none';
+        }
+      }
+    }
+  }
+
   // Sound Toggle Button
   const soundBtn = document.getElementById('sound-toggle-btn');
   if (soundBtn) {
