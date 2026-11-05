@@ -14,65 +14,75 @@
 
   <!-- Global Header -->
   <header class="app-header">
-    <div class="brand-container">
-      <div class="brand-logo-badge" aria-hidden="true">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-        </svg>
+    <div class="header-main-bar">
+      <div class="brand-container">
+        <div class="brand-logo-badge" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <span class="championship-tag">
+            <span class="pulse-dot"></span>
+            SPSU Udaipur Championship • War Arena
+          </span>
+          <h1 class="system-title">Campus Placement Drive Management System</h1>
+        </div>
       </div>
-      <div class="brand-info">
-        <span class="championship-tag">
-          <span class="pulse-dot"></span>
-          SPSU Udaipur Championship • War Arena
-        </span>
-        <h1 class="system-title">Campus Placement Drive Management System</h1>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <a href="https://github.com/abhay-kumawat/SYSTEM-DESIGN" target="_blank" rel="noopener noreferrer" class="github-badge-btn" title="View Source on GitHub">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+          <span>GitHub</span>
+        </a>
+        <button id="sound-toggle-btn" class="icon-btn active" title="Toggle Sound FX" aria-label="Toggle Sound Effects">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+        </button>
+        <button class="cta-pill-btn" onclick="document.querySelector('[data-target=\'panel-simulator\']').click()">
+          <span>🚀</span> Test Live App
+        </button>
       </div>
     </div>
 
     <!-- Main Navigation Bar -->
-    <nav class="main-nav-wrapper" aria-label="System Design Navigation">
-      <div class="main-nav-tabs">
-        <button class="nav-tab-btn active" data-target="panel-overview">
-          <span>📋</span> Overview
-        </button>
-        <button class="nav-tab-btn" data-target="panel-hld">
-          <span>🏛️</span> HLD Architecture
-        </button>
-        <button class="nav-tab-btn" data-target="panel-erd">
-          <span>🗄️</span> ER Diagram
-        </button>
-        <button class="nav-tab-btn" data-target="panel-lld">
-          <span>⚙️</span> LLD & Pseudo-code
-        </button>
-        <button class="nav-tab-btn" data-target="panel-screens">
-          <span>📱</span> UI/UX 6 States
-        </button>
-        <button class="nav-tab-btn" data-target="panel-matrix">
-          <span>🧪</span> Error Matrix
-        </button>
-        <button class="nav-tab-btn" data-target="panel-simulator">
-          <span>🎮</span> Live Prototype
-        </button>
-        <button class="nav-tab-btn" data-target="panel-bonus">
-          <span>🍕</span> Bonus Challenge
-        </button>
-        <button class="nav-tab-btn" data-target="panel-interview">
-          <span>💼</span> Interview & LinkedIn
-        </button>
-      </div>
-    </nav>
-
-    <!-- Header Actions -->
-    <div class="header-actions">
-      <button id="sound-toggle-btn" class="icon-btn active" title="Toggle Sound FX" aria-label="Toggle Sound Effects">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-        </svg>
-      </button>
-      <button class="cta-pill-btn" onclick="document.querySelector('[data-target=\'panel-simulator\']').click()">
-        <span>🚀</span> Test Live App
-      </button>
+    <div class="header-nav-strip">
+      <nav class="main-nav-wrapper" aria-label="System Design Navigation">
+        <div class="main-nav-tabs">
+          <button class="nav-tab-btn active" data-target="panel-overview">
+            <span>📋</span> Overview
+          </button>
+          <button class="nav-tab-btn" data-target="panel-hld">
+            <span>🏛️</span> HLD Architecture
+          </button>
+          <button class="nav-tab-btn" data-target="panel-erd">
+            <span>🗄️</span> ER Diagram
+          </button>
+          <button class="nav-tab-btn" data-target="panel-lld">
+            <span>⚙️</span> LLD & Pseudo-code
+          </button>
+          <button class="nav-tab-btn" data-target="panel-screens">
+            <span>📱</span> UI/UX 6 States
+          </button>
+          <button class="nav-tab-btn" data-target="panel-matrix">
+            <span>🧪</span> Error Matrix
+          </button>
+          <button class="nav-tab-btn" data-target="panel-simulator">
+            <span>🎮</span> Live Prototype
+          </button>
+          <button class="nav-tab-btn" data-target="panel-bonus">
+            <span>🍕</span> Bonus Challenge
+          </button>
+          <button class="nav-tab-btn" data-target="panel-interview">
+            <span>💼</span> Interview & LinkedIn
+          </button>
+        </div>
+      </nav>
     </div>
   </header>
 

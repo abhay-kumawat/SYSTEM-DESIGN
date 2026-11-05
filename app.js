@@ -259,6 +259,7 @@ function initNavigation() {
       panels.forEach(p => p.classList.remove('active-panel'));
 
       tab.classList.add('active');
+      tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       const activePanel = document.getElementById(targetId);
       if (activePanel) {
         activePanel.classList.add('active-panel');
